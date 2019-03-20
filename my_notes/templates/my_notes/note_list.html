@@ -1,0 +1,48 @@
+{% extends 'my_notes/base.html' %}
+
+{% block title %}List - {% endblock %}
+
+{% if search_string %}
+    <p>Results for "{{ search_string }}":</p>
+{% endif %}
+
+
+{% block content %}
+    <table class="table is-striped is-hoverable is-fullwidth">
+        <tbody>
+        {% for object in object_list %}
+            <tr>
+                <td>
+                    {{ object.created_at | default:'' | date:"d/m/Y" }}
+                </td>
+
+                <td>
+                    {% if object.tags %}
+                        {% for tag in object.tags %}
+                            <a href="{% url 'my_notes:list' %}?search_string={{ tag }}" class="tag is-info">{{ tag }}</a>
+                        {% endfor %}
+                    {% endif %}
+                </td>
+
+                <td>
+                    <a href="{% url 'my_notes:detail' pk=object.id %}">
+                        {{ object.title }}
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'my_notes:edit' pk=object.id %}">
+                        <span class="icon">
+                          <i class="fas fa-edit" title="Edit"></i>
+                        </span>
+                    </a>
+                    <a href="{% url 'my_notes:delete' pk=object.id %}">
+                        <span class="icon">
+                            <i class="fas fa-times" title="Delete"></i>
+                        </span>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

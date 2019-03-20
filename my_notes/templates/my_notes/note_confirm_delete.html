@@ -1,0 +1,17 @@
+{% extends 'my_notes/base.html' %}
+
+{% block title %}Delete {{ object }} - {% endblock %}
+
+{% block content %}
+    <div class="notification is-warning">
+        <button class="delete"></button>
+        <form method="post">{% csrf_token %}
+            <p class="has-text-centered">Are you sure you want to delete "{{ object }}"?</p>
+            <input type="submit" value="Confirm" class="button is-danger">
+        </form>
+    </div>
+{% endblock %}
+
+{% block script %}
+    {% include 'my_notes/partials/_script.html' %}
+{% endblock %}

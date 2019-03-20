@@ -1,0 +1,14 @@
+{% extends 'my_notes/base.html' %}
+
+{% block title %}Logout - {% endblock %}
+
+{% block content %}
+<div class="notification is-info">
+    <button class="delete"></button>
+    <p class="has-text-centered">You have logged out successfully!</p>
+</div>
+{% endblock %}
+
+{% block script %}
+    {% include 'my_notes/partials/_script.html' %}
+{% endblock %}

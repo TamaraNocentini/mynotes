@@ -1,0 +1,6 @@
+Django
+psycopg2
+flake8
+django-markdown-deux<1.1
+git+https://github.com/jhotujec/crispy-forms-bulma
+django-crispy-forms

@@ -1,0 +1,14 @@
+{% extends 'my_notes/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {% if object %}Edit: {{ object }}{% else %}New note{% endif %} -
+{% endblock %}
+
+{% block content %}
+    <h1 class="title">
+        {% if object %}Edit{% else %}New{% endif %} note
+    </h1>
+    {% crispy form %}
+{% endblock %}

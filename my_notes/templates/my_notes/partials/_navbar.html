@@ -1,0 +1,79 @@
+<nav class="navbar is-spaced"
+     role="navigation"
+     aria-label="main navigation">
+
+    <div class="container">
+        <div class="navbar-brand">
+                <span class="icon"><i
+                        class="icofont-pen-nib icofont-2x hvr-icon-hang"></i></span>
+            <a class="navbar-item" href="/"> <strong>MyNotes</strong></a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            {% if user.is_authenticated %}
+
+                <div class="navbar-start">
+                    <a class="navbar-item"
+                       href="{% url 'my_notes:new' %}">
+                        New
+                    </a>
+                </div>
+
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="buttons">
+
+                            {% block navbar_item_buttons %}
+                                {% if object_list %}
+                                    <a class="button is-link" target="_blank"
+                                       href="{% url 'my_notes:export' %}">
+                                        <strong>Export</strong>
+                                    </a>
+                                {% endif %}
+                            {% endblock %}
+
+                        </div>
+                    </div>
+
+                    <div class="navbar-item">
+
+                        {% block navbar_item %}
+                            <form method="get" action="{% url 'my_notes:list' %}">
+                                <div class="field has-addons">
+                                    <div class="control">
+                                        <input class="input" type="text"
+                                               placeholder="Find a note"
+                                               name="search_string"
+                                               value="{{ search_string }}">
+                                    </div>
+                                    <div class="control">
+                                        <input type="submit" value="Search"
+                                               class="button">
+                                    </div>
+                                </div>
+                            </form>
+                        {% endblock %}
+                    </div>
+
+                    <div class="navbar-item">
+                        Hello {{ user.username }},&nbsp;
+                        <a href="{% url 'logout' %}">
+                            <strong>logout</strong>
+                        </a>
+                    </div>
+                </div>
+            {% else %}
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="buttons">
+                            <a class="button is-link"
+                               href="{% url 'login' %}">
+                                <strong>Login</strong>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {%  endif %}
+        </div>
+    </div>
+</nav>
